@@ -1,0 +1,18 @@
+{
+  "workspace": {
+    "id": "77979cb5-aef8-4ebd-848d-fc2ba2a4822a"
+  },
+  "entities": {
+    "collections": [
+      "../postman/collections/PayPal APIs_57959294-cff16bf4-c044-4d6a-a90b-79652c33ae08.postman_collection.json",
+      "../postman/collections/PayPal APIs_57959294-f3267367-588b-4d0f-8b46-84d58b37bc3c.postman_collection.json"
+    ],
+    "environments": [
+      "../postman/environments/PayPal Override Env_57959294-2a5a4c8a-7311-4eb8-83ad-78add1684b01.postman_environment.json",
+      "../postman/environments/PayPal Override Env_57959294-b8875c79-1d78-40db-83e3-d0d705ac8843.postman_environment.json"
+    ],
+    "specs": [],
+    "flows": [],
+    "globals": []
+  }
+}
