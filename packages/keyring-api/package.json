@@ -54,7 +54,7 @@
     "@types/uuid": "^9.0.8",
     "async-mutex": "^0.5.0",
     "bitcoin-address-validation": "^2.2.3",
-    "uuid": "^9.0.1"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@lavamoat/allow-scripts": "^3.2.1",
