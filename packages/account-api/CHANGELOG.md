@@ -7,6 +7,66 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0]
+
+### Added
+
+- Add new wallet status `'in-progress:delete-accounts'` ([#632](https://github.com/MetaMask/accounts/pull/632))
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^24.0.0` to `^24.1.0` ([#620](https://github.com/MetaMask/accounts/pull/620))
+
+## [2.0.0]
+
+### Changed
+
+- **BREAKING:** Drop support for Node.js v18 and v20; minimum version is now v22 ([#593](https://github.com/MetaMask/accounts/pull/593))
+- Bump `@metamask/keyring-api` from `^23.6.0` to `^24.0.0` ([#604](https://github.com/MetaMask/accounts/pull/604), [#611](https://github.com/MetaMask/accounts/pull/611))
+- Bump `@metamask/keyring-utils` from `^4.0.0` to `^5.0.0` ([#611](https://github.com/MetaMask/accounts/pull/611))
+
+## [1.1.1]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^23.5.0` to `^23.6.0` ([#600](https://github.com/MetaMask/accounts/pull/600))
+- Bump `@metamask/keyring-utils` from `^3.3.1` to `^4.0.0` ([#600](https://github.com/MetaMask/accounts/pull/600))
+
+## [1.1.0]
+
+### Added
+
+- Add `PrivateKeyAccount<Account>` type helper ([#590](https://github.com/MetaMask/accounts/pull/590))
+
+### Changed
+
+- Bump `@metamask/keyring-utils` from `^3.2.0` to `^3.3.1` ([#544](https://github.com/MetaMask/accounts/pull/544), [#546](https://github.com/MetaMask/accounts/pull/546))
+- Bump `@metamask/keyring-api` from `^23.1.0` to `^23.5.0` ([#562](https://github.com/MetaMask/accounts/pull/562), [#569](https://github.com/MetaMask/accounts/pull/569), [#583](https://github.com/MetaMask/accounts/pull/583), [#587](https://github.com/MetaMask/accounts/pull/587))
+
+## [1.0.4]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^23.0.1` to `^23.1.0` ([#538](https://github.com/MetaMask/accounts/pull/538))
+
+## [1.0.3]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^23.0.0` to `^23.0.1` ([#518](https://github.com/MetaMask/accounts/pull/518))
+
+## [1.0.2]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^22.0.0` to `^23.0.0` ([#515](https://github.com/MetaMask/accounts/pull/515))
+
+## [1.0.1]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^21.6.0` to `^22.0.0` ([#482](https://github.com/MetaMask/accounts/pull/482))
+
 ## [1.0.0]
 
 ### Changed
@@ -139,7 +199,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add `AccountGroup` and `AccountWallet` ([#307](https://github.com/MetaMask/accounts/pull/307))
 
-[Unreleased]: https://github.com/MetaMask/accounts/compare/@metamask/account-api@1.0.0...HEAD
+[Unreleased]: https://github.com/MetaMask/accounts/compare/@metamask/account-api@2.1.0...HEAD
+[2.1.0]: https://github.com/MetaMask/accounts/compare/@metamask/account-api@2.0.0...@metamask/account-api@2.1.0
+[2.0.0]: https://github.com/MetaMask/accounts/compare/@metamask/account-api@1.1.1...@metamask/account-api@2.0.0
+[1.1.1]: https://github.com/MetaMask/accounts/compare/@metamask/account-api@1.1.0...@metamask/account-api@1.1.1
+[1.1.0]: https://github.com/MetaMask/accounts/compare/@metamask/account-api@1.0.4...@metamask/account-api@1.1.0
+[1.0.4]: https://github.com/MetaMask/accounts/compare/@metamask/account-api@1.0.3...@metamask/account-api@1.0.4
+[1.0.3]: https://github.com/MetaMask/accounts/compare/@metamask/account-api@1.0.2...@metamask/account-api@1.0.3
+[1.0.2]: https://github.com/MetaMask/accounts/compare/@metamask/account-api@1.0.1...@metamask/account-api@1.0.2
+[1.0.1]: https://github.com/MetaMask/accounts/compare/@metamask/account-api@1.0.0...@metamask/account-api@1.0.1
 [1.0.0]: https://github.com/MetaMask/accounts/compare/@metamask/account-api@0.12.0...@metamask/account-api@1.0.0
 [0.12.0]: https://github.com/MetaMask/accounts/compare/@metamask/account-api@0.11.0...@metamask/account-api@0.12.0
 [0.11.0]: https://github.com/MetaMask/accounts/compare/@metamask/account-api@0.10.0...@metamask/account-api@0.11.0

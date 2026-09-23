@@ -212,6 +212,14 @@ export const BLE_ERROR_MAPPINGS = {
 };
 
 export const MOBILE_ERROR_MAPPINGS = {
+  CAMERA_PERMISSION_DENIED: {
+    code: ErrorCode.PermissionCameraDenied,
+    message: 'Camera permission denied',
+    severity: Severity.Err,
+    category: Category.Configuration,
+    userMessage:
+      'Camera permission is required to scan QR codes. Please enable it in your device settings.',
+  },
   NOT_SUPPORTED: {
     code: ErrorCode.MobileNotSupported,
     message: 'Operation not supported on mobile',
@@ -221,7 +229,27 @@ export const MOBILE_ERROR_MAPPINGS = {
   },
 };
 
-/* eslint-disable @typescript-eslint/naming-convention */
+/**
+ * QR error mappings - static error data for QR hardware wallets and their related flows.
+ */
+export const QR_WALLET_ERROR_MAPPINGS: Record<string, ErrorMapping> = {
+  CAMERA_PERMISSION_PROMPT_DISMISSED: {
+    code: ErrorCode.PermissionCameraPromptDismissed,
+    message: 'Camera permission prompt dismissed without granting access',
+    severity: Severity.Warning,
+    category: Category.Configuration,
+    userMessage:
+      'MetaMask needs camera access to scan the QR code on your device.',
+  },
+  CAMERA_PERMISSION_BLOCKED: {
+    code: ErrorCode.PermissionCameraDenied,
+    message: 'Camera permission blocked by the browser',
+    severity: Severity.Err,
+    category: Category.Configuration,
+    userMessage: 'To continue, allow camera access in your browser settings.',
+  },
+};
+
 /**
  * Trezor error mappings - static error data for Trezor hardware wallets.
  * These mappings provide consistent error classification across Trezor integrations.
@@ -435,4 +463,22 @@ export const TREZOR_ERROR_MAPPINGS: Record<string, ErrorMapping> = {
       'Your Trezor device failed to initialize. Please unlock it and try again.',
   },
 };
-/* eslint-enable @typescript-eslint/naming-convention */
+
+/**
+ * Keyring error mappings - static error data for keyring-level validation errors
+ * that are not tied to a Ledger transport status code.
+ *
+ * TODO: Wire DeviceStateOnlyV4Supported into keyring-eth-trezor and keyring-eth-qr
+ * so all hardware keyrings throw HardwareWalletError for unsupported typed data versions.
+ */
+export const KEYRING_ERROR_MAPPINGS: Partial<Record<ErrorCode, ErrorMapping>> =
+  {
+    [ErrorCode.DeviceStateOnlyV4Supported]: {
+      code: ErrorCode.DeviceStateOnlyV4Supported,
+      message: 'Only version 4 of typed data signing is supported',
+      severity: Severity.Err,
+      category: Category.DeviceState,
+      userMessage:
+        'This device can only sign version 4 (V4) typed data. This site requested an older signature type that is not supported.',
+    },
+  };

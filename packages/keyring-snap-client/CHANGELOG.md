@@ -7,6 +7,84 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Bump `@metamask/keyring-api` from `^24.0.0` to `^24.1.0` ([#620](https://github.com/MetaMask/accounts/pull/620))
+
+## [10.0.0]
+
+### Changed
+
+- **BREAKING:** Drop support for Node.js v18 and v20; minimum version is now v22 ([#593](https://github.com/MetaMask/accounts/pull/593))
+- Bump `@metamask/keyring-api` from `^23.6.0` to `^24.0.0` ([#604](https://github.com/MetaMask/accounts/pull/604), [#611](https://github.com/MetaMask/accounts/pull/611))
+- Bump `@metamask/keyring-utils` from `^4.0.0` to `^5.0.0` ([#611](https://github.com/MetaMask/accounts/pull/611))
+
+## [9.2.1]
+
+### Changed
+
+- Bump `@metamask/superstruct` from `^3.1.0` to `^3.4.1` ([#580](https://github.com/MetaMask/accounts/pull/580), [#577](https://github.com/MetaMask/accounts/pull/577))
+- Bump `@metamask/keyring-api` from `^23.5.0` to `^23.6.0` ([#600](https://github.com/MetaMask/accounts/pull/600))
+- Bump `@metamask/keyring-utils` from `^3.3.1` to `^4.0.0` ([#600](https://github.com/MetaMask/accounts/pull/600))
+
+## [9.2.0]
+
+### Added
+
+- Add `resolveAccountAddress` to v2 `KeyringClient` ([#585](https://github.com/MetaMask/accounts/pull/585))
+
+### Changed
+
+- Bump `@metamask/superstruct` from `^3.1.0` to `^3.3.0` ([#580](https://github.com/MetaMask/accounts/pull/580))
+- Bump `@metamask/keyring-api` from `^23.4.0` to `^23.5.0` ([#587](https://github.com/MetaMask/accounts/pull/587))
+
+## [9.1.0]
+
+### Added
+
+- Implements `KeyringSnapRpc` (v2) in `KeyringClient` (v2) ([#582](https://github.com/MetaMask/accounts/pull/582))
+  - Exposes all core v2 keyring methods plus optional snap-specific ones: `setSelectedAccounts`, `getAccountTransactions`, `getAccountAssets`, and `getAccountBalances`.
+
+### Changed
+
+- Bump `@metamask/keyring-utils` from `^3.2.0` to `^3.3.1` ([#544](https://github.com/MetaMask/accounts/pull/544), [#546](https://github.com/MetaMask/accounts/pull/546))
+- Bump `@metamask/keyring-api` from `^23.1.0` to `^23.4.0` ([#562](https://github.com/MetaMask/accounts/pull/562), [#569](https://github.com/MetaMask/accounts/pull/569), [#583](https://github.com/MetaMask/accounts/pull/583))
+
+## [9.0.2]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^23.0.1` to `^23.1.0` ([#538](https://github.com/MetaMask/accounts/pull/538))
+
+## [9.0.1]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^23.0.0` to `^23.0.1` ([#518](https://github.com/MetaMask/accounts/pull/518))
+
+### Fixed
+
+- Workaround Browserify subpath export for `/v2` ([#516](https://github.com/MetaMask/accounts/pull/516))
+
+## [9.0.0]
+
+### Added
+
+- Add `KeyringClientV2` class implementing the keyring v2 RPC client ([#408](https://github.com/MetaMask/accounts/pull/408))
+
+### Changed
+
+- **BREAKING:** Move and rename `KeyringClientV2` to the new `./v2` subpath export ([#513](https://github.com/MetaMask/accounts/pull/513))
+  - `KeyringClientV2` is now `KeyringClient` from `@metamask/keyring-snap-client/v2`.
+- Bump `@metamask/utils` from `^11.1.0` to `^11.11.0` ([#489](https://github.com/MetaMask/accounts/pull/489), [#483](https://github.com/MetaMask/accounts/pull/483))
+- Bump `@metamask/keyring-api` from `^22.0.0` to `^23.0.0` ([#515](https://github.com/MetaMask/accounts/pull/515))
+
+## [8.2.1]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^21.6.0` to `^22.0.0` ([#482](https://github.com/MetaMask/accounts/pull/482))
+
 ## [8.2.0]
 
 ### Added
@@ -39,7 +117,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Bump `@metamask/keyring-api` from `^20.0.0` to `^21.0.0` ([#355](https://github.com/MetaMask/accounts/pull/355)), ([#356](https://github.com/MetaMask/accounts/pull/356))
+- **BREAKING:** Bump `@metamask/keyring-api` from `^20.0.0` to `^21.0.0` ([#355](https://github.com/MetaMask/accounts/pull/355), [#356](https://github.com/MetaMask/accounts/pull/356))
 
 ## [7.0.0]
 
@@ -67,7 +145,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **BREAKING:** `KeyringSnapRpcClient` now extends `KeyringPublicClient` instead of `KeyringClient`
   - The `submitRequest` method is not available for this client.
-- Bump `@metamask/keyring-api` from `^17.4.0` to `^18.0.0` ([#277](https://github.com/MetaMask/accounts/pull/277)), ([#288](https://github.com/MetaMask/accounts/pull/288)), ([#291](https://github.com/MetaMask/accounts/pull/291))
+- Bump `@metamask/keyring-api` from `^17.4.0` to `^18.0.0` ([#277](https://github.com/MetaMask/accounts/pull/277), [#288](https://github.com/MetaMask/accounts/pull/288), [#291](https://github.com/MetaMask/accounts/pull/291))
 
 ## [4.1.0]
 
@@ -77,13 +155,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Bump `@metamask/keyring-api` from `^17.2.0` to `^17.4.0` ([#263](https://github.com/MetaMask/accounts/pull/263)), ([#269](https://github.com/MetaMask/accounts/pull/269))
+- Bump `@metamask/keyring-api` from `^17.2.0` to `^17.4.0` ([#263](https://github.com/MetaMask/accounts/pull/263), [#269](https://github.com/MetaMask/accounts/pull/269))
 
 ## [4.0.1]
 
 ### Changed
 
-- Bump `@metamask/keyring-api` from `^17.0.0` to `^17.2.0` ([#212](https://github.com/MetaMask/accounts/pull/212)), ([#220](https://github.com/MetaMask/accounts/pull/220))
+- Bump `@metamask/keyring-api` from `^17.0.0` to `^17.2.0` ([#212](https://github.com/MetaMask/accounts/pull/212), [#220](https://github.com/MetaMask/accounts/pull/220))
 - Use `ts-bridge/cli@0.6.3` ([#214](https://github.com/MetaMask/accounts/pull/214))
   - This new version fixes a bug regarding some missing exports.
 
@@ -148,7 +226,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - This new version fixes a bug with CJS re-exports.
 - Initial release ([#24](https://github.com/MetaMask/accounts/pull/24))
 
-[Unreleased]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-snap-client@8.2.0...HEAD
+[Unreleased]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-snap-client@10.0.0...HEAD
+[10.0.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-snap-client@9.2.1...@metamask/keyring-snap-client@10.0.0
+[9.2.1]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-snap-client@9.2.0...@metamask/keyring-snap-client@9.2.1
+[9.2.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-snap-client@9.1.0...@metamask/keyring-snap-client@9.2.0
+[9.1.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-snap-client@9.0.2...@metamask/keyring-snap-client@9.1.0
+[9.0.2]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-snap-client@9.0.1...@metamask/keyring-snap-client@9.0.2
+[9.0.1]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-snap-client@9.0.0...@metamask/keyring-snap-client@9.0.1
+[9.0.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-snap-client@8.2.1...@metamask/keyring-snap-client@9.0.0
+[8.2.1]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-snap-client@8.2.0...@metamask/keyring-snap-client@8.2.1
 [8.2.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-snap-client@8.1.1...@metamask/keyring-snap-client@8.2.0
 [8.1.1]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-snap-client@8.1.0...@metamask/keyring-snap-client@8.1.1
 [8.1.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-snap-client@8.0.0...@metamask/keyring-snap-client@8.1.0

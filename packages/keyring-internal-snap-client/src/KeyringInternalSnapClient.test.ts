@@ -1,15 +1,13 @@
-import {
-  EthMethod,
-  EthScope,
-  type KeyringAccount,
-} from '@metamask/keyring-api';
-import type { KeyringRequestWithoutOrigin } from '@metamask/keyring-internal-api';
+import { EthMethod, EthScope } from '@metamask/keyring-api';
+import type { KeyringAccount } from '@metamask/keyring-api';
+import type {
+  KeyringRequestWithoutOrigin,
+  KeyringRequestWithoutOriginMetadata,
+} from '@metamask/keyring-internal-api';
 import type { SnapId } from '@metamask/snaps-sdk';
 
-import {
-  KeyringInternalSnapClient,
-  type KeyringInternalSnapClientMessenger,
-} from './KeyringInternalSnapClient';
+import { KeyringInternalSnapClient } from './KeyringInternalSnapClient';
+import type { KeyringInternalSnapClientMessenger } from './KeyringInternalSnapClient';
 
 const MOCK_ACCOUNT: KeyringAccount = {
   id: '13f94041-6ae6-451f-a0fe-afdd2fda18a7',
@@ -120,6 +118,47 @@ describe('KeyringInternalSnapClient', () => {
         result: null,
       });
       await client.submitRequestWithoutOrigin(keyringRequest);
+      expect(messenger.call).toHaveBeenCalledWith(
+        'SnapController:handleRequest',
+        request,
+      );
+    });
+  });
+
+  describe('submitRequestWithoutOriginMetadata', () => {
+    const keyringRequest: KeyringRequestWithoutOriginMetadata = {
+      id: 'mock-request-id',
+      scope: EthScope.Mainnet,
+      account: MOCK_ACCOUNT.id,
+      origin: 'test',
+      request: {
+        method: EthMethod.PersonalSign,
+        params: {},
+      },
+    };
+    const request = {
+      snapId,
+      origin: 'metamask',
+      handler: 'onKeyringRequest',
+      request: {
+        id: expect.any(String),
+        jsonrpc: '2.0',
+        method: 'keyring_submitRequest',
+        params: keyringRequest,
+      },
+    };
+
+    it('calls the submitRequestWithoutOriginMetadata method', async () => {
+      const client = new KeyringInternalSnapClient({
+        messenger: messenger as unknown as KeyringInternalSnapClientMessenger,
+        snapId,
+      });
+
+      messenger.call.mockResolvedValue({
+        pending: false,
+        result: null,
+      });
+      await client.submitRequestWithoutOriginMetadata(keyringRequest);
       expect(messenger.call).toHaveBeenCalledWith(
         'SnapController:handleRequest',
         request,

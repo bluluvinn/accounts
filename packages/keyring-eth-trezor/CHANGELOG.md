@@ -7,11 +7,108 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Bump `@metamask/keyring-sdk` from `^3.0.0` to `^3.1.0` ([#614](https://github.com/MetaMask/accounts/pull/614))
+- Bump `@metamask/keyring-api` from `^24.0.0` to `^24.1.0` ([#620](https://github.com/MetaMask/accounts/pull/620))
+- Bump `@metamask/eth-sig-util` from `^8.2.0` to `^9.0.0` ([#626](https://github.com/MetaMask/accounts/pull/626))
+
+## [11.0.0]
+
+### Changed
+
+- **BREAKING:** Drop support for Node.js v18 and v20; minimum version is now v22 ([#593](https://github.com/MetaMask/accounts/pull/593))
+- Bump `@metamask/keyring-api` from `^23.6.0` to `^24.0.0` ([#604](https://github.com/MetaMask/accounts/pull/604), [#611](https://github.com/MetaMask/accounts/pull/611))
+- Bump `@metamask/hw-wallet-sdk` from `^0.11.0` to `^1.0.0` ([#611](https://github.com/MetaMask/accounts/pull/611))
+- Bump `@metamask/keyring-sdk` from `^2.3.0` to `^3.0.0` ([#611](https://github.com/MetaMask/accounts/pull/611))
+- Bump `@metamask/keyring-utils` from `^4.0.0` to `^5.0.0` ([#611](https://github.com/MetaMask/accounts/pull/611))
+
+## [10.1.2]
+
+### Changed
+
+- Bump `@metamask/hw-wallet-sdk` from `^0.10.0` to `^0.11.0` ([#599](https://github.com/MetaMask/accounts/pull/599))
+- Bump `@metamask/keyring-api` from `^23.5.0` to `^23.6.0` ([#600](https://github.com/MetaMask/accounts/pull/600))
+- Bump `@metamask/keyring-sdk` from `^2.2.0` to `^2.3.0` ([#600](https://github.com/MetaMask/accounts/pull/600))
+- Bump `@metamask/keyring-utils` from `^3.3.1` to `^4.0.0` ([#600](https://github.com/MetaMask/accounts/pull/600))
+
+## [10.1.1]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^23.1.0` to `^23.5.0` ([#562](https://github.com/MetaMask/accounts/pull/562), [#569](https://github.com/MetaMask/accounts/pull/569), [#583](https://github.com/MetaMask/accounts/pull/583), [#587](https://github.com/MetaMask/accounts/pull/587))
+- Bump `@metamask/keyring-sdk` from `^2.1.1` to `^2.2.0` ([#562](https://github.com/MetaMask/accounts/pull/562))
+- Bump `@metamask/hw-wallet-sdk` from `^0.8.0` to `^0.10.0` ([#576](https://github.com/MetaMask/accounts/pull/576), [#587](https://github.com/MetaMask/accounts/pull/587))
+
+### Fixed
+
+- Surface Trezor user cancellation and rejection errors as `UserCancelled`/`UserRejected` instead of `ErrorCode.Unknown`, fixing uninformative "Unknown error" messages when users reject signing ([#576](https://github.com/MetaMask/accounts/pull/576))
+  - Complements [MetaMask/core#8490](https://github.com/MetaMask/core/pull/8490) and fixes [metamask-extension#41184](https://github.com/MetaMask/metamask-extension/issues/41184).
+
+## [10.1.0]
+
+### Added
+
+- Expose device-management pass-throughs on the V2 `TrezorKeyring` wrapper (inherited by the V2 `OneKeyKeyring`): `getModel`, `hdPath` (getter), `bridge` (getter), `setHdPath`, `getFirstPage`, `getNextPage`, `getPreviousPage`, `forgetDevice`, `isUnlocked`. `forgetDevice` additionally clears the V2 account registry to keep it in sync with the inner keyring. ([#551](https://github.com/MetaMask/accounts/pull/551))
+
+### Changed
+
+- Bump `@metamask/keyring-sdk` from `^2.0.2` to `^2.1.1` ([#544](https://github.com/MetaMask/accounts/pull/544), [#546](https://github.com/MetaMask/accounts/pull/546))
+- Bump `@metamask/keyring-utils` from `^3.2.0` to `^3.3.1` ([#544](https://github.com/MetaMask/accounts/pull/544), [#546](https://github.com/MetaMask/accounts/pull/546))
+
+## [10.0.2]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^23.0.1` to `^23.1.0` ([#538](https://github.com/MetaMask/accounts/pull/538))
+- Bump `@metamask/keyring-sdk` from `^2.0.1` to `^2.0.2` ([#538](https://github.com/MetaMask/accounts/pull/538))
+
+## [10.0.1]
+
+### Changed
+
+- Bump `@metamask/account-api` from `^1.0.2` to `^1.0.3` ([#518](https://github.com/MetaMask/accounts/pull/518))
+- Bump `@metamask/keyring-api` from `^23.0.0` to `^23.0.1` ([#518](https://github.com/MetaMask/accounts/pull/518))
+- Bump `@metamask/keyring-sdk` from `^2.0.0` to `^2.0.1` ([#518](https://github.com/MetaMask/accounts/pull/518))
+
+### Fixed
+
+- Workaround Browserify subpath export for `/v2` ([#516](https://github.com/MetaMask/accounts/pull/516))
+
+## [10.0.0]
+
+### Added
+
+- Add `./v2` subpath export for keyring v2 implementation ([#513](https://github.com/MetaMask/accounts/pull/513))
+  - `TrezorKeyring`, `TrezorKeyringOptions`, `OneKeyKeyring`, and `OneKeyKeyringOptions` are now available from `@metamask/eth-trezor-keyring/v2`.
+
+### Changed
+
+- **BREAKING:** Move and rename `TrezorKeyringV2` and `OneKeyKeyringV2` to the new `./v2` subpath export ([#513](https://github.com/MetaMask/accounts/pull/513))
+  - `TrezorKeyringV2` is now `TrezorKeyring` from `@metamask/eth-trezor-keyring/v2`.
+  - `OneKeyKeyringV2` is now `OneKeyKeyring` from `@metamask/eth-trezor-keyring/v2`.
+- Bump `@metamask/utils` from `^11.10.0` to `^11.11.0` ([#483](https://github.com/MetaMask/accounts/pull/483))
+- Bump `@metamask/account-api` from `^1.0.1` to `^1.0.2` ([#515](https://github.com/MetaMask/accounts/pull/515))
+- Bump `@metamask/keyring-api` from `^22.0.0` to `^23.0.0` ([#515](https://github.com/MetaMask/accounts/pull/515))
+- Bump `@metamask/keyring-sdk` from `^1.2.0` to `^2.0.0` ([#515](https://github.com/MetaMask/accounts/pull/515))
+
+## [9.1.1]
+
+### Changed
+
+- Add new dependency `@metamask/keyring-sdk@1.2.0` ([#478](https://github.com/MetaMask/accounts/pull/478), [#482](https://github.com/MetaMask/accounts/pull/482), [#496](https://github.com/MetaMask/accounts/pull/496), [#509](https://github.com/MetaMask/accounts/pull/509))
+  - This package now contains the keyring v2 wrapper helpers (`EthKeyringWrapper`).
+  - The account ID (generated by `KeyringAccountRegistry`) are now deterministic for EVM addresses.
+- Bump `@metamask/hw-wallet-sdk` from `^0.6.0` to `^0.8.0` ([#482](https://github.com/MetaMask/accounts/pull/482), [#497](https://github.com/MetaMask/accounts/pull/497))
+- Bump `@metamask/keyring-api` from `^21.6.0` to `^22.0.0` ([#482](https://github.com/MetaMask/accounts/pull/482))
+- Bump `@metamask/account-api` from `^1.0.0` to `^1.0.1` ([#487](https://github.com/MetaMask/accounts/pull/487))
+- Bump `@metamask/utils` from `^11.1.0` to `^11.10.0` ([#489](https://github.com/MetaMask/accounts/pull/489))
+
 ## [9.1.0]
 
 ### Added
 
-- Add `TrezorKeyringV2` and `OneKeyKeyringV2` classes implementing `KeyringV2` interface ([#412](https://github.com/MetaMask/accounts/pull/412)), ([#451](https://github.com/MetaMask/accounts/pull/451)), ([#453](https://github.com/MetaMask/accounts/pull/453))
+- Add `TrezorKeyringV2` and `OneKeyKeyringV2` classes implementing `KeyringV2` interface ([#412](https://github.com/MetaMask/accounts/pull/412), [#451](https://github.com/MetaMask/accounts/pull/451), [#453](https://github.com/MetaMask/accounts/pull/453))
   - Wraps legacy `TrezorKeyring` and `OneKeyKeyring` to expose accounts via the unified `KeyringV2` API and the `KeyringAccount` type.
   - Extends `EthKeyringWrapper` for common Ethereum logic.
 - Add `createTrezorError` and `getTrezorErrorIdentifier` error helpers ([#471](https://github.com/MetaMask/accounts/pull/471))
@@ -26,7 +123,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Bump `@trezor/connect-web` to `^9.6.0` ([#241](https://github.com/MetaMask/accounts/pull/241)), ([#300](https://github.com/MetaMask/accounts/pull/300))
+- Bump `@trezor/connect-web` to `^9.6.0` ([#241](https://github.com/MetaMask/accounts/pull/241), [#300](https://github.com/MetaMask/accounts/pull/300))
   - Require to enable new 7702 signing flows.
 - **BREAKING:** The method signature for `signTypedData` has been changed ([#224](https://github.com/MetaMask/accounts/pull/224))
   - The `options` argument type has been changed to `{ version: SignTypedDataVersion.V3 | SignTypedDataVersion.V4 } | undefined`.
@@ -83,7 +180,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Bump `@metamask/eth-sig-util` dependency from `^8.0.0` to `8.2.0` ([#177](https://github.com/MetaMask/accounts/pull/177)), ([#134](https://github.com/MetaMask/accounts/pull/134))
+- Bump `@metamask/eth-sig-util` dependency from `^8.0.0` to `8.2.0` ([#177](https://github.com/MetaMask/accounts/pull/177), [#134](https://github.com/MetaMask/accounts/pull/134))
 
 ## [6.0.1]
 
@@ -117,8 +214,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Bump `sinon` and `@types/sinon` to latest versions ([#51](https://github.com/metamask/accounts/pull/51))
-- Add `syncpack` and sync dependencies ([#53](https://github.com/metamask/accounts/pull/53))
+- Bump `sinon` and `@types/sinon` to latest versions ([#51](https://github.com/MetaMask/accounts/pull/51))
+- Add `syncpack` and sync dependencies ([#53](https://github.com/MetaMask/accounts/pull/53))
 
 ## [3.1.2]
 
@@ -226,7 +323,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support new versions of ethereumjs/tx ([#88](https://github.com/metamask/eth-trezor-keyring/pull/88))
 
-[Unreleased]: https://github.com/MetaMask/accounts/compare/@metamask/eth-trezor-keyring@9.1.0...HEAD
+[Unreleased]: https://github.com/MetaMask/accounts/compare/@metamask/eth-trezor-keyring@11.0.0...HEAD
+[11.0.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-trezor-keyring@10.1.2...@metamask/eth-trezor-keyring@11.0.0
+[10.1.2]: https://github.com/MetaMask/accounts/compare/@metamask/eth-trezor-keyring@10.1.1...@metamask/eth-trezor-keyring@10.1.2
+[10.1.1]: https://github.com/MetaMask/accounts/compare/@metamask/eth-trezor-keyring@10.1.0...@metamask/eth-trezor-keyring@10.1.1
+[10.1.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-trezor-keyring@10.0.2...@metamask/eth-trezor-keyring@10.1.0
+[10.0.2]: https://github.com/MetaMask/accounts/compare/@metamask/eth-trezor-keyring@10.0.1...@metamask/eth-trezor-keyring@10.0.2
+[10.0.1]: https://github.com/MetaMask/accounts/compare/@metamask/eth-trezor-keyring@10.0.0...@metamask/eth-trezor-keyring@10.0.1
+[10.0.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-trezor-keyring@9.1.1...@metamask/eth-trezor-keyring@10.0.0
+[9.1.1]: https://github.com/MetaMask/accounts/compare/@metamask/eth-trezor-keyring@9.1.0...@metamask/eth-trezor-keyring@9.1.1
 [9.1.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-trezor-keyring@9.0.0...@metamask/eth-trezor-keyring@9.1.0
 [9.0.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-trezor-keyring@8.0.0...@metamask/eth-trezor-keyring@9.0.0
 [8.0.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-trezor-keyring@7.0.0...@metamask/eth-trezor-keyring@8.0.0

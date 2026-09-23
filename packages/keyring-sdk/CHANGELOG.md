@@ -1,0 +1,143 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Changed
+
+- **BREAKING:** Remove envelope from migration framework ([#619](https://github.com/MetaMask/accounts/pull/619))
+  - The envelope made it harder to integrate with existing state.
+  - We still keep the requirement of having a `version` field to be declared, but the state can be "flatten" instead of living inside the `data` (envelope) field.
+- Bump `@metamask/keyring-api` from `^24.0.0` to `^24.1.0` ([#620](https://github.com/MetaMask/accounts/pull/620))
+- Bump `@metamask/eth-sig-util` from `^8.2.0` to `^9.0.0` ([#626](https://github.com/MetaMask/accounts/pull/626))
+
+## [3.1.0]
+
+### Added
+
+- Add `decodeMnemonic` and `decodeMnemonicWords` ([#612](https://github.com/MetaMask/accounts/pull/612))
+
+## [3.0.0]
+
+### Added
+
+- Add new entropy support ([#603](https://github.com/MetaMask/accounts/pull/603))
+- Add `encodeMnemonicWords` ([#606](https://github.com/MetaMask/accounts/pull/606))
+
+### Changed
+
+- **BREAKING:** Drop support for Node.js v18 and v20; minimum version is now v22 ([#593](https://github.com/MetaMask/accounts/pull/593))
+- Bump `@metamask/keyring-api` from `^23.6.0` to `^24.0.0` ([#604](https://github.com/MetaMask/accounts/pull/604), [#611](https://github.com/MetaMask/accounts/pull/611))
+- Bump `@metamask/keyring-utils` from `^4.0.0` to `^5.0.0` ([#611](https://github.com/MetaMask/accounts/pull/611))
+
+## [2.3.0]
+
+### Added
+
+- Add keyring state migration framework ([#505](https://github.com/MetaMask/accounts/pull/505))
+  - Use `createMigrations().add(...)` to build a chain of versioned migration steps, and `.apply(state)` to migrate the internal state of keyrings
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^23.2.0` to `^23.6.0` ([#569](https://github.com/MetaMask/accounts/pull/569), [#583](https://github.com/MetaMask/accounts/pull/583), [#587](https://github.com/MetaMask/accounts/pull/587), [#600](https://github.com/MetaMask/accounts/pull/600))
+- Bump `@metamask/superstruct` from `^3.1.0` to `^3.4.1` ([#580](https://github.com/MetaMask/accounts/pull/580), [#577](https://github.com/MetaMask/accounts/pull/577))
+- Bump `@metamask/keyring-utils` from `^3.3.1` to `^4.0.0` ([#600](https://github.com/MetaMask/accounts/pull/600))
+
+## [2.2.0]
+
+### Added
+
+- Add `EthKeyringV1Adapter` and typed errors for adapting v2 ETH keyrings to legacy ETH keyring signing flows ([#555](https://github.com/MetaMask/accounts/pull/555))
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^23.1.0` to `^23.2.0` ([#562](https://github.com/MetaMask/accounts/pull/562))
+
+## [2.1.1]
+
+### Changed
+
+- Bump `@metamask/keyring-utils` from `^3.3.0` to `^3.3.1` ([#546](https://github.com/MetaMask/accounts/pull/546))
+
+## [2.1.0]
+
+### Added
+
+- Add `KeyringV1Adapter` ([#543](https://github.com/MetaMask/accounts/pull/543))
+  - This adapter can be used when a keyring v2 instance has no v1 equivalent (`KeyringController` still rely on v1 logic for its vault/state management).
+
+### Changed
+
+- Bump `@metamask/keyring-utils` from `^3.2.0` to `^3.3.0` ([#544](https://github.com/MetaMask/accounts/pull/544))
+
+## [2.0.2]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^23.0.1` to `^23.1.0` ([#538](https://github.com/MetaMask/accounts/pull/538))
+
+## [2.0.1]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^23.0.0` to `^23.0.1` ([#518](https://github.com/MetaMask/accounts/pull/518))
+
+### Fixed
+
+- Workaround Browserify subpath export for `/v2` ([#516](https://github.com/MetaMask/accounts/pull/516))
+
+## [2.0.0]
+
+### Added
+
+- Add `./v2` subpath export for keyring v2 building blocks ([#513](https://github.com/MetaMask/accounts/pull/513))
+  - `KeyringWrapper`, `EthKeyringWrapper`, `EthKeyringMethod`, and `EthKeyringWrapperOptions` are now available from `@metamask/keyring-sdk/v2`.
+
+### Changed
+
+- **BREAKING:** Move `KeyringWrapper` and `EthKeyringWrapper` (and related types) to the new `./v2` subpath export ([#513](https://github.com/MetaMask/accounts/pull/513))
+  - Use `import { KeyringWrapper, EthKeyringWrapper, EthKeyringMethod } from '@metamask/keyring-sdk/v2'` instead.
+  - `KeyringAccountRegistry`, `encodeMnemonic`, and `generateEthAccountId` remain available from the main entry point.
+- Bump `@metamask/utils` from `^11.10.0` to `^11.11.0` ([#483](https://github.com/MetaMask/accounts/pull/483))
+- Bump `@metamask/keyring-api` from `^22.0.0` to `^23.0.0` ([#515](https://github.com/MetaMask/accounts/pull/515))
+
+## [1.2.0]
+
+### Added
+
+- Add `generateId` option to `KeyringAccountRegistry` ([#503](https://github.com/MetaMask/accounts/pull/503))
+- Add `generateEthAccountId` to generate deterministic account IDs for EVM addresses, and use it by default in `EthKeyringWrapper` ([#504](https://github.com/MetaMask/accounts/pull/504))
+
+## [1.1.0]
+
+### Added
+
+- Add `encodeMnemonic` ([#495](https://github.com/MetaMask/accounts/pull/495))
+
+### Changed
+
+- Bump `@metamask/utils` from `^11.1.0` to `^11.10.0` ([#489](https://github.com/MetaMask/accounts/pull/489))
+
+## [1.0.0]
+
+### Added
+
+- Initial release, extracted from `@metamask/keyring-api` ([#478](https://github.com/MetaMask/accounts/pull/478), [#482](https://github.com/MetaMask/accounts/pull/482))
+
+[Unreleased]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-sdk@3.1.0...HEAD
+[3.1.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-sdk@3.0.0...@metamask/keyring-sdk@3.1.0
+[3.0.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-sdk@2.3.0...@metamask/keyring-sdk@3.0.0
+[2.3.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-sdk@2.2.0...@metamask/keyring-sdk@2.3.0
+[2.2.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-sdk@2.1.1...@metamask/keyring-sdk@2.2.0
+[2.1.1]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-sdk@2.1.0...@metamask/keyring-sdk@2.1.1
+[2.1.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-sdk@2.0.2...@metamask/keyring-sdk@2.1.0
+[2.0.2]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-sdk@2.0.1...@metamask/keyring-sdk@2.0.2
+[2.0.1]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-sdk@2.0.0...@metamask/keyring-sdk@2.0.1
+[2.0.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-sdk@1.2.0...@metamask/keyring-sdk@2.0.0
+[1.2.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-sdk@1.1.0...@metamask/keyring-sdk@1.2.0
+[1.1.0]: https://github.com/MetaMask/accounts/compare/@metamask/keyring-sdk@1.0.0...@metamask/keyring-sdk@1.1.0
+[1.0.0]: https://github.com/MetaMask/accounts/releases/tag/@metamask/keyring-sdk@1.0.0

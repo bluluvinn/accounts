@@ -7,6 +7,163 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Bump `@metamask/eth-sig-util` from `^8.2.0` to `^9.0.0` ([#626](https://github.com/MetaMask/accounts/pull/626))
+
+## [13.1.0]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^24.0.0` to `^24.1.0` ([#620](https://github.com/MetaMask/accounts/pull/620))
+
+### Fixed
+
+- Fix Ledger Gen5 EIP-712 signing for payloads that omit the `EIP712Domain` type by deriving it from the `domain` object keys before sending to the device and before signature verification ([#624](https://github.com/MetaMask/accounts/pull/624))
+
+## [13.0.2]
+
+### Changed
+
+- Use `@ledgerhq/context-module@^2.1.0` instead of pinned version ([#616](https://github.com/MetaMask/accounts/pull/616))
+- Bump `@metamask/keyring-sdk` from `^3.0.0` to `^3.1.0` ([#614](https://github.com/MetaMask/accounts/pull/614))
+
+## [13.0.1]
+
+### Changed
+
+- Bump `@metamask/hw-wallet-sdk` from `^0.11.0` to `^1.0.0` ([#611](https://github.com/MetaMask/accounts/pull/611))
+- Bump `@metamask/keyring-api` from `^23.7.0` to `^24.0.0` ([#611](https://github.com/MetaMask/accounts/pull/611))
+- Bump `@metamask/keyring-sdk` from `^2.3.0` to `^3.0.0` ([#611](https://github.com/MetaMask/accounts/pull/611))
+
+## [13.0.0]
+
+### Added
+
+- Expose `LedgerDmkBridge.dmk` so clients can use the underlying Device Management Kit directly ([#607](https://github.com/MetaMask/accounts/pull/607))
+
+### Changed
+
+- **BREAKING:** Drop support for Node.js v18 and v20; minimum version is now v22 ([#593](https://github.com/MetaMask/accounts/pull/593))
+- Bump `@ledgerhq/device-management-kit` from `1.5.1` to `^1.7.1` ([#607](https://github.com/MetaMask/accounts/pull/607))
+- Bump `@metamask/keyring-api` from `^23.5.0` to `^23.7.0` ([#600](https://github.com/MetaMask/accounts/pull/600), [#604](https://github.com/MetaMask/accounts/pull/604))
+- Bump `@metamask/keyring-sdk` from `^2.2.0` to `^2.3.0` ([#600](https://github.com/MetaMask/accounts/pull/600))
+
+## [12.4.0]
+
+### Added
+
+- Add `createDmkError` factory function and wire DMK `_tag` resolution into the Ledger DMK bridge ([#597](https://github.com/MetaMask/accounts/pull/597))
+  - `createDmkError` constructs `HardwareWalletError` instances from DMK `_tag` strings.
+  - `translateDmkError` now resolves DMK connection/session errors (e.g. `DeviceSessionNotFound`, `DeviceLockedError`) by their `_tag` before falling back to hex APDU status codes.
+  - `LedgerDmkBridge.#toError` also resolves DMK `_tag` errors so `sendCommand` failures are correctly classified.
+
+### Changed
+
+- Bump `@metamask/hw-wallet-sdk` from `^0.10.0` to `^0.11.0` ([#597](https://github.com/MetaMask/accounts/pull/597), [#599](https://github.com/MetaMask/accounts/pull/599))
+
+## [12.3.0]
+
+### Changed
+
+- Throw `HardwareWalletError` with `DeviceStateOnlyV4Supported` when `signTypedData` is called with a non-V4 version ([#575](https://github.com/MetaMask/accounts/pull/575))
+- Bump `@metamask/hw-wallet-sdk` from `^0.8.0` to `^0.10.0` ([#576](https://github.com/MetaMask/accounts/pull/576), [#587](https://github.com/MetaMask/accounts/pull/587))
+- Bump `@metamask/keyring-api` from `^23.3.0` to `^23.5.0` ([#583](https://github.com/MetaMask/accounts/pull/583), [#587](https://github.com/MetaMask/accounts/pull/587))
+
+## [12.2.0]
+
+### Added
+
+- Add `LedgerDmkBridge` and `LedgerDmkTransportMiddleware` for Ledger Device Management Kit (DMK) support ([#473](https://github.com/MetaMask/accounts/pull/473))
+  - New `LedgerDmkBridge` class implementing the `LedgerBridge` interface via Ledger's DMK.
+  - New `LedgerDmkTransportMiddleware` managing sessions, device discovery, and Ethereum signer lifecycle.
+  - DMK error translation utilities (`translateDmkError`, `isDeviceExchangeError`) mapping to `TransportStatusError`.
+  - Custom `EthGetAppConfigurationCommand` for retrieving Ethereum app config via DMK.
+  - Session state monitoring with `onSessionStateChange` observable and `isDeviceConnected` getter.
+  - Add EIP-7702 authorization signing to the Ledger keyring ([#564](https://github.com/MetaMask/accounts/pull/564))
+  - Not yet functional: both iframe and mobile bridges throw until DMK support lands.
+  - Fixes hex `v` parsing (`'1b'`) for personal_sign and typed data.
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^23.1.0` to `^23.3.0` ([#562](https://github.com/MetaMask/accounts/pull/562), [#569](https://github.com/MetaMask/accounts/pull/569))
+- Bump `@metamask/keyring-sdk` from `^2.1.1` to `^2.2.0` ([#562](https://github.com/MetaMask/accounts/pull/562))
+
+## [12.1.0]
+
+### Added
+
+- Expose device-management pass-throughs on the V2 `LedgerKeyring` wrapper: `hdPath` (getter), `bridge` (getter), `getDeviceId`, `setDeviceId`, `setHdPath`, `getFirstPage`, `getNextPage`, `getPreviousPage`, `forgetDevice`, `isUnlocked`, `attemptMakeApp`, `getAppNameAndVersion`. `forgetDevice` additionally clears the V2 account registry to keep it in sync with the inner keyring. ([#551](https://github.com/MetaMask/accounts/pull/551))
+
+## [12.0.3]
+
+### Changed
+
+- Bump `@metamask/keyring-sdk` from `^2.0.2` to `^2.1.1` ([#544](https://github.com/MetaMask/accounts/pull/544), [#546](https://github.com/MetaMask/accounts/pull/546))
+
+### Fixed
+
+- Fall back to blind signing on mobile when `clearSignTransaction` fails, except when the user rejects on the device ([#522](https://github.com/MetaMask/accounts/pull/522))
+
+## [12.0.2]
+
+### Changed
+
+- Bump `@metamask/keyring-api` from `^23.0.1` to `^23.1.0` ([#538](https://github.com/MetaMask/accounts/pull/538))
+- Bump `@metamask/keyring-sdk` from `^2.0.1` to `^2.0.2` ([#538](https://github.com/MetaMask/accounts/pull/538))
+
+## [12.0.1]
+
+### Changed
+
+- Bump `@metamask/account-api` from `^1.0.2` to `^1.0.3` ([#518](https://github.com/MetaMask/accounts/pull/518))
+- Bump `@metamask/keyring-api` from `^23.0.0` to `^23.0.1` ([#518](https://github.com/MetaMask/accounts/pull/518))
+- Bump `@metamask/keyring-sdk` from `^2.0.0` to `^2.0.1` ([#518](https://github.com/MetaMask/accounts/pull/518))
+
+### Fixed
+
+- Workaround Browserify subpath export for `/v2` ([#516](https://github.com/MetaMask/accounts/pull/516))
+
+## [12.0.0]
+
+### Added
+
+- Add `./v2` subpath export for keyring v2 implementation ([#513](https://github.com/MetaMask/accounts/pull/513))
+  - `LedgerKeyring` and `LedgerKeyringOptions` are now available from `@metamask/eth-ledger-bridge-keyring/v2`.
+
+### Changed
+
+- **BREAKING:** Move and rename `LedgerKeyringV2` and `LedgerKeyringV2Options` to the new `./v2` subpath export ([#513](https://github.com/MetaMask/accounts/pull/513))
+  - `LedgerKeyringV2` is now `LedgerKeyring` from `@metamask/eth-ledger-bridge-keyring/v2`.
+  - `LedgerKeyringV2Options` is now `LedgerKeyringOptions` from `@metamask/eth-ledger-bridge-keyring/v2`.
+- Bump `@metamask/utils` from `^11.10.0` to `^11.11.0` ([#483](https://github.com/MetaMask/accounts/pull/483))
+- Bump `@metamask/account-api` from `^1.0.1` to `^1.0.2` ([#515](https://github.com/MetaMask/accounts/pull/515))
+- Bump `@metamask/keyring-api` from `^22.0.0` to `^23.0.0` ([#515](https://github.com/MetaMask/accounts/pull/515))
+- Bump `@metamask/keyring-sdk` from `^1.2.0` to `^2.0.0` ([#515](https://github.com/MetaMask/accounts/pull/515))
+
+### Fixed
+
+- Add dynamic NFT and ERC-20 check ([#506](https://github.com/MetaMask/accounts/pull/506))
+
+## [11.4.0]
+
+### Added
+
+- Add `getTransactionSelector` to read the 4-byte calldata selector from serialized transaction hex (legacy and typed txs) ([#506](https://github.com/MetaMask/accounts/pull/506))
+  - Ledger mobile bridge passes `nft: true` to `clearSignTransaction` when that selector is NFT-only (ERC-721 / ERC-1155).
+- Add `ERC20_WRITE_SELECTORS` for the three EIP-20 write functions (`transfer`, `transferFrom`, `approve`) ([#506](https://github.com/MetaMask/accounts/pull/506))
+
+## [11.3.1]
+
+### Changed
+
+- Add new dependency `@metamask/keyring-sdk@1.2.0` ([#478](https://github.com/MetaMask/accounts/pull/478), [#482](https://github.com/MetaMask/accounts/pull/482), [#496](https://github.com/MetaMask/accounts/pull/496), [#509](https://github.com/MetaMask/accounts/pull/509))
+  - This package now contains the keyring v2 wrapper helpers (`EthKeyringWrapper`).
+  - The account ID (generated by `KeyringAccountRegistry`) are now deterministic for EVM addresses.
+- Bump `@metamask/hw-wallet-sdk` from `^0.6.0` to `^0.8.0` ([#482](https://github.com/MetaMask/accounts/pull/482), [#497](https://github.com/MetaMask/accounts/pull/497))
+- Bump `@metamask/keyring-api` from `^21.6.0` to `^22.0.0` ([#482](https://github.com/MetaMask/accounts/pull/482))
+- Bump `@metamask/account-api` from `^1.0.0` to `^1.0.1` ([#487](https://github.com/MetaMask/accounts/pull/487))
+
 ## [11.3.0]
 
 ### Changed
@@ -22,7 +179,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add `LedgerKeyringV2` class implementing `KeyringV2` interface ([#416](https://github.com/MetaMask/accounts/pull/416)), ([#451](https://github.com/MetaMask/accounts/pull/451)), ([#453](https://github.com/MetaMask/accounts/pull/453))
+- Add `LedgerKeyringV2` class implementing `KeyringV2` interface ([#416](https://github.com/MetaMask/accounts/pull/416), [#451](https://github.com/MetaMask/accounts/pull/451), [#453](https://github.com/MetaMask/accounts/pull/453))
   - Wraps legacy `LedgerKeyring` to expose accounts via the unified `KeyringV2` API and the `KeyringAccount` type.
   - Extends `EthKeyringWrapper` for common Ethereum logic.
 
@@ -34,7 +191,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Increase ledger iframe timeout interval ([#314](https://github.com/MetaMask/accounts.git/pull/314))
+- Increase ledger iframe timeout interval ([#314](https://github.com/MetaMask/accounts/pull/314))
 
 ## [11.1.1]
 
@@ -122,8 +279,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Bump `@metamask/eth-sig-util` dependency from `^8.0.0` to `8.2.0` ([#177](https://github.com/MetaMask/accounts/pull/177)), ([#134](https://github.com/MetaMask/accounts/pull/134))
-- Bump `@metamask/utils` dependency from `^9.3.1` to `11.1.0` ([#134](https://github.com/MetaMask/accounts/pull/134)), ([#167](https://github.com/MetaMask/accounts/pull/167))
+- Bump `@metamask/eth-sig-util` dependency from `^8.0.0` to `8.2.0` ([#177](https://github.com/MetaMask/accounts/pull/177), [#134](https://github.com/MetaMask/accounts/pull/134))
+- Bump `@metamask/utils` dependency from `^9.3.1` to `11.1.0` ([#134](https://github.com/MetaMask/accounts/pull/134), [#167](https://github.com/MetaMask/accounts/pull/167))
 
 ## [8.0.3]
 
@@ -193,7 +350,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Bump `sinon` and `@types/sinon` to latest versions ([#51](https://github.com/MetaMask/accounts/pull/51))
-- Add `syncpack` and sync dependencies ([#53](https://github.com/metamask/accounts/pull/53))
+- Add `syncpack` and sync dependencies ([#53](https://github.com/MetaMask/accounts/pull/53))
 
 ## [4.1.3]
 
@@ -252,7 +409,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **BREAKING**: `IFrameMessageResponse` now has more restrictive typings (#207) ([#207](https://github.com/MetaMask/eth-ledger-bridge-keyring/pull/207))
+- **BREAKING**: `IFrameMessageResponse` now has more restrictive typings([#207](https://github.com/MetaMask/eth-ledger-bridge-keyring/pull/207)) ([#207](https://github.com/MetaMask/accounts/pull/207))
 
 ## [2.0.1]
 
@@ -365,7 +522,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support new versions of ethereumjs/tx ([#68](https://github.com/MetaMask/eth-ledger-bridge-keyring/pull/68))
 
-[Unreleased]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@11.3.0...HEAD
+[Unreleased]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@13.1.0...HEAD
+[13.1.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@13.0.2...@metamask/eth-ledger-bridge-keyring@13.1.0
+[13.0.2]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@13.0.1...@metamask/eth-ledger-bridge-keyring@13.0.2
+[13.0.1]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@13.0.0...@metamask/eth-ledger-bridge-keyring@13.0.1
+[13.0.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@12.4.0...@metamask/eth-ledger-bridge-keyring@13.0.0
+[12.4.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@12.3.0...@metamask/eth-ledger-bridge-keyring@12.4.0
+[12.3.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@12.2.0...@metamask/eth-ledger-bridge-keyring@12.3.0
+[12.2.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@12.1.0...@metamask/eth-ledger-bridge-keyring@12.2.0
+[12.1.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@12.0.3...@metamask/eth-ledger-bridge-keyring@12.1.0
+[12.0.3]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@12.0.2...@metamask/eth-ledger-bridge-keyring@12.0.3
+[12.0.2]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@12.0.1...@metamask/eth-ledger-bridge-keyring@12.0.2
+[12.0.1]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@12.0.0...@metamask/eth-ledger-bridge-keyring@12.0.1
+[12.0.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@11.4.0...@metamask/eth-ledger-bridge-keyring@12.0.0
+[11.4.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@11.3.1...@metamask/eth-ledger-bridge-keyring@11.4.0
+[11.3.1]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@11.3.0...@metamask/eth-ledger-bridge-keyring@11.3.1
 [11.3.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@11.2.0...@metamask/eth-ledger-bridge-keyring@11.3.0
 [11.2.0]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@11.1.2...@metamask/eth-ledger-bridge-keyring@11.2.0
 [11.1.2]: https://github.com/MetaMask/accounts/compare/@metamask/eth-ledger-bridge-keyring@11.1.1...@metamask/eth-ledger-bridge-keyring@11.1.2

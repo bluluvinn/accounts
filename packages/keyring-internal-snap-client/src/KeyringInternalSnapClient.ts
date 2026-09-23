@@ -1,19 +1,21 @@
 import { KeyringRpcMethod } from '@metamask/keyring-api';
 import type {
   KeyringRequestWithoutOrigin,
+  KeyringRequestWithoutOriginMetadata,
   KeyringResponseWithoutOrigin,
 } from '@metamask/keyring-internal-api';
 import { SubmitRequestResponseV1Struct } from '@metamask/keyring-internal-api';
-import { KeyringClient, type Sender } from '@metamask/keyring-snap-client';
-import { strictMask, type JsonRpcRequest } from '@metamask/keyring-utils';
+import type { Sender } from '@metamask/keyring-snap-client';
+import { KeyringClient } from '@metamask/keyring-snap-client';
+import { strictMask } from '@metamask/keyring-utils';
 import type { Messenger } from '@metamask/messenger';
-import type { HandleSnapRequest } from '@metamask/snaps-controllers';
-import type { SnapId } from '@metamask/snaps-sdk';
+import type { SnapControllerHandleRequestAction } from '@metamask/snaps-controllers';
+import type { JsonRpcRequest, SnapId } from '@metamask/snaps-sdk';
 import type { HandlerType } from '@metamask/snaps-utils';
 import type { Json } from '@metamask/utils';
 
 // We only need to dispatch Snap request to the Snaps controller for now.
-type AllowedActions = HandleSnapRequest;
+type AllowedActions = SnapControllerHandleRequestAction;
 
 /**
  * A restricted-`Messenger` used by `KeyringInternalSnapClient` to dispatch
@@ -28,7 +30,7 @@ export type KeyringInternalSnapClientMessenger = Messenger<
  * Implementation of the `Sender` interface that can be used to send requests
  * to a Snap through a `Messenger`.
  */
-class SnapControllerMessengerSender implements Sender {
+export class SnapControllerMessengerSender implements Sender {
   readonly #snapId: SnapId;
 
   readonly #origin: string;
@@ -133,6 +135,24 @@ export class KeyringInternalSnapClient extends KeyringClient {
    */
   async submitRequestWithoutOrigin(
     request: KeyringRequestWithoutOrigin,
+  ): Promise<KeyringResponseWithoutOrigin> {
+    return strictMask(
+      await this.send({
+        method: KeyringRpcMethod.SubmitRequest,
+        params: request,
+      }),
+      SubmitRequestResponseV1Struct,
+    );
+  }
+
+  /**
+   * Submit a keyring request v2 (with no `originMetadata`).
+   *
+   * @param request - Keyring request.
+   * @returns Keyring request's response.
+   */
+  async submitRequestWithoutOriginMetadata(
+    request: KeyringRequestWithoutOriginMetadata,
   ): Promise<KeyringResponseWithoutOrigin> {
     return strictMask(
       await this.send({
